@@ -1,0 +1,6 @@
+version: "3.9"
+services:
+  news_lists:
+    build: ./infra/php
+    volumes:
+      - ./src:/data
