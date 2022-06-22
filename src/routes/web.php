@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +13,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/index', [ApiController::class, 'index']);
+Route::get('/post_favorite', [ApiController::class, 'registFav']);
+Route::get('/get_favorite', [ApiController::class, 'getFav']);
+Route::get('/invalid_favorite', [ApiController::class, 'invalidFav']);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     // return view('welcome');
+// });

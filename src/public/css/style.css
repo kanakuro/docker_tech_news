@@ -1,0 +1,55 @@
+header {
+    padding: 5rem 10rem 2.5rem 7rem;
+}
+.header_menu{
+    display: flex;
+    padding: 1rem 1rem 1rem 7rem;
+}
+.field {
+    padding: 2.5rem 10rem 5rem 7rem;
+}
+.card_body {
+    width: 80%;
+    padding:3%;
+}
+.favorite{
+    padding:3%;
+    font-size: 1.5rem;
+}
+.favorite_after{
+    padding:3%;
+    font-size: 1.5rem;
+}
+.favorite:hover{
+    font-weight:bold;
+    cursor:pointer;
+    color:crimson;
+}
+.favorite_after:hover{
+    cursor:pointer;
+}
+.favorite:active{
+    font-weight:bold;
+    cursor:pointer;
+    color:crimson;
+}
+
+.news_thumbnail {
+    width: 30%;
+}
+
+.data_body{
+    display: flex;
+    align-items:center;
+}
+.clone_fav{
+    display: flex;
+    align-items:center;
+}
+
+@media screen and (max-width: 959px) {
+    /* 959px以下に適用されるCSS（タブレット用） */
+}
+@media screen and (max-width: 480px) {
+    /* 480px以下に適用されるCSS（スマホ用） */
+}

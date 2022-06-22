@@ -1,6 +1,6 @@
 FROM mysql/mysql-server:8.0
 
-ENV MYSQL_DATABASE=laravel \
+ENV MYSQL_DATABASE=news_lists \
   MYSQL_USER=phper \
   MYSQL_PASSWORD=secret \
   MYSQL_ROOT_PASSWORD=secret \
@@ -8,3 +8,4 @@ ENV MYSQL_DATABASE=laravel \
 
 COPY ./my.cnf /etc/my.cnf
 RUN chmod 644 /etc/my.cnf
+
