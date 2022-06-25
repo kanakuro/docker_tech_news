@@ -80,7 +80,8 @@ class ApiController extends Controller
         $user_id = 99;
         $result = FavoriteNews::where('user_id', $user_id)
         ->where('invalid', 0)
-        ->get();
+        ->get()->toArray();
+        \Log::debug(gettype($result));
         return $result;
     }
 

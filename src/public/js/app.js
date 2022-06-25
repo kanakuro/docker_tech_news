@@ -108,6 +108,7 @@ $(function () {
                 //サーバーに送信するデータ
                 user_id: user_id,
             },
+            dataType: "json",
             success: function (data) {
                 $("div.data_body").hide();
                 $("div.fav_data_body").show();
@@ -125,7 +126,9 @@ $(function () {
                 });
                 $("#original").remove();
             },
-            error: function (err) {},
+            error: function (err) {
+                console.log(err);
+            },
         });
     });
 

@@ -9,14 +9,18 @@
                 <img src="{{$data['thumbnail']}}" class="news_thumbnail">
             </div>
         </div>
-        @if($data['fav'] == 0)
-            <div class="favorite" id="favorite_0{{$loop->index}}">♡</div>
-            <div class="favorite_after" id="favorite_after_0{{$loop->index}}" style="display:none;">💖</div>
-        @elseif($data['fav'] == 1)
-            <div class="favorite" id="favorite_0{{$loop->index}}" style="display:none;">♡</div>
-            <div class="favorite_after" id="favorite_after_0{{$loop->index}}">💖</div>
-        @endif
-
+        <div class="favorite_area">
+            @if($data['fav'] == 0)
+                <div class="favorite" id="favorite_0{{$loop->index}}">♡</div>
+                <div class="favorite_after" id="favorite_after_0{{$loop->index}}" style="display:none;">💖</div>
+            @elseif($data['fav'] == 1)
+                <div class="favorite" id="favorite_0{{$loop->index}}" style="display:none;">♡</div>
+                <div class="favorite_after" id="favorite_after_0{{$loop->index}}">💖</div>
+            @endif
+        </div>
+        <div class="share_area">
+            <img src="../img/share.png" class="share_icon">
+        </div>
     </div>
     @endforeach
     <div class="fav_data_body" style="display:none;">
@@ -29,8 +33,13 @@
                     <img src="" class="news_thumbnail">
                 </div>
             </div>
-            <div class="favorite" style="display:none;">♡</div>
-            <div class="favorite_after">💖</div>
+            <div class="favorite_area">
+                <div class="favorite" style="display:none;">♡</div>
+                <div class="favorite_after">💖</div>
+            </div>
+            <div class="share_area">
+                <img src="../img/share.png" class="share_icon">
+            </div>
         </div>
     </div>
 </div>

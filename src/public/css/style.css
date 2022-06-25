@@ -12,6 +12,14 @@ header {
     width: 80%;
     padding:3%;
 }
+.fav_card_body {
+    width: 80%;
+    padding:3%;
+}
+.share_icon{
+    width: 30;
+    padding:1rem;
+}
 .favorite{
     padding:3%;
     font-size: 1.5rem;
@@ -46,7 +54,6 @@ header {
     display: flex;
     align-items:center;
 }
-
 @media screen and (max-width: 959px) {
     /* 959px以下に適用されるCSS（タブレット用） */
 }
