@@ -1,6 +1,7 @@
 // require("./bootstrap");
 
 $(function () {
+    // お気に入り登録
     $(".favorite").click(function () {
         // 表示
         var fav_id = $(this).attr("id").slice(9, 11);
@@ -28,7 +29,6 @@ $(function () {
                 .find("img.news_thumbnail")
                 .attr("src");
         }
-        // お気に入り登録
         $.ajax({
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -46,6 +46,7 @@ $(function () {
         });
     });
 
+    // お気に入り解除
     $(".favorite_after").click(function () {
         // 表示
         var fav_id = $(this).attr("id").slice(15, 17);
@@ -95,6 +96,21 @@ $(function () {
         });
     });
 
+    // 共有ボタン押下
+    $(".share").click(function () {
+        const fav_url = $(this).parent().parent().find("a").attr("href");
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/notify_slack/",
+            type: "GET",
+            data: { fav_url: fav_url },
+            success: function (data) {},
+            error: function (err) {},
+        });
+    });
+    // お気に入り一覧へ遷移
     $(".to_fav_list").click(function () {
         var user_id = 99;
         // お気に入り画面へ遷移
@@ -132,6 +148,7 @@ $(function () {
         });
     });
 
+    // ニュース一覧へ遷移
     $(".to_news_list").click(function () {
         // 画面をリロード
         location.reload();

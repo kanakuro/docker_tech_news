@@ -11,15 +11,27 @@
         </div>
         <div class="favorite_area">
             @if($data['fav'] == 0)
-                <div class="favorite" id="favorite_0{{$loop->index}}">♡</div>
-                <div class="favorite_after" id="favorite_after_0{{$loop->index}}" style="display:none;">💖</div>
+                <div class="favorite" id="favorite_0{{$loop->index}}">
+                    <img src="../img/heart.png" class="favorite_icon">
+                </div>
+                <div class="favorite_after" id="favorite_after_0{{$loop->index}}" style="display:none;">
+                    <img src="../img/heart_red.png" class="favorite_icon">
+                </div>
             @elseif($data['fav'] == 1)
-                <div class="favorite" id="favorite_0{{$loop->index}}" style="display:none;">♡</div>
-                <div class="favorite_after" id="favorite_after_0{{$loop->index}}">💖</div>
+                <div class="favorite" id="favorite_0{{$loop->index}}" style="display:none;">
+                    <img src="../img/heart.png" class="favorite_icon">
+                </div>
+                <div class="favorite_after" id="favorite_after_0{{$loop->index}}">
+                    <img src="../img/heart_red.png" class="favorite_icon">
+                </div>
             @endif
         </div>
         <div class="share_area">
-            <img src="../img/share.png" class="share_icon">
+            <div class="share">
+            </div>
+            <div class="share_active">
+                <img src="../img/share_blue.png" class="share_icon">
+            </div>
         </div>
     </div>
     @endforeach
@@ -34,12 +46,20 @@
                 </div>
             </div>
             <div class="favorite_area">
-                <div class="favorite" style="display:none;">♡</div>
-                <div class="favorite_after">💖</div>
+                <div class="favorite" style="display:none;">
+                    <img src="../img/heart.png" class="favorite_icon">
+                </div>
+                <div class="favorite_after">
+                    <img src="../img/heart_red.png" class="favorite_icon">
+                </div>
             </div>
             <div class="share_area">
-                <img src="../img/share.png" class="share_icon">
-            </div>
+                <div class="share">
+                </div>
+                <div class="share_active">
+                    <img src="../img/share_blue.png" class="share_icon">
+                </div>
+                </div>
         </div>
     </div>
 </div>

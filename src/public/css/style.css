@@ -20,6 +20,29 @@ header {
     width: 30;
     padding:1rem;
 }
+.share{
+    background-image:url("../img/share.png");
+    width: 30;
+    padding:1rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.share:hover{
+    cursor:pointer;
+}
+.share:active{
+    background-image:url("../img/share_blue.png");
+}
+.share_active{
+    display: none;
+}
+/* .share_after{
+    display: none;
+} */
+.favorite_icon{
+    width: 30;
+    padding:1rem;
+}
 .favorite{
     padding:3%;
     font-size: 1.5rem;

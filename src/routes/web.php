@@ -17,6 +17,7 @@ Route::get('/index', [ApiController::class, 'index']);
 Route::get('/post_favorite', [ApiController::class, 'registFav']);
 Route::get('/get_favorite', [ApiController::class, 'getFav']);
 Route::get('/invalid_favorite', [ApiController::class, 'invalidFav']);
+Route::get('/notify_slack', [ApiController::class, 'sendSlack']);
 
 // Route::get('/', function () {
 //     // return view('welcome');

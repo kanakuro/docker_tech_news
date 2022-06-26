@@ -30,7 +30,6 @@ class ApiController extends Controller
             $fav_lists = FavoriteNews::where('user_id', 99)
             ->where('invalid', 0)
             ->get();
-
             for ($id = 0; $id < $count; $id++) {
                 $is_fav = 0;
                 $news_name = $articles['articles'][$id]['title'];
@@ -70,8 +69,6 @@ class ApiController extends Controller
         $fav_img_url =  $request->img_url;
         $user_id = 99;
         FavoriteNews::registFav($user_id, $fav_title, $fav_url, $fav_img_url);
-        // slackに通知
-        \Slack::send($fav_url);
         return;
     }
 
@@ -81,7 +78,6 @@ class ApiController extends Controller
         $result = FavoriteNews::where('user_id', $user_id)
         ->where('invalid', 0)
         ->get()->toArray();
-        \Log::debug(gettype($result));
         return $result;
     }
 
@@ -96,5 +92,13 @@ class ApiController extends Controller
             FavoriteNews::invalidFav($existing_fav -> id);
             return;
         }
+        return;
+    }
+
+    public function sendSlack(Request $request)
+    {
+        // slackに通知
+        \Slack::send($request->fav_url);
+        return;
     }
 }
