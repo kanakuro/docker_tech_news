@@ -10,10 +10,9 @@
     <script type="text/javascript" src="{{ asset('js/app.js')}}"></script>
 </head>
 <body>
-<header>
-    <h1>tech-news</h1>
-</header>
-<div class="header_menu">
+<x-header>
+</x-header>
+<div class="news_menu">
     <div class="fav_list">
         <button class="to_fav_list">お気に入り</button>
     </div>
@@ -22,7 +21,7 @@
     </div>
 </div>
 @include('news')
-<footer>
-</footer>
+<x-footer>
+</x-footer>
 </body>
 </html>

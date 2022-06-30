@@ -7,8 +7,8 @@ $(function () {
         var fav_id = $(this).attr("id").slice(9, 11);
         $("#favorite_" + fav_id).hide();
         $("#favorite_after_" + fav_id).show();
-        let favOrNews = $(this).parent().attr("class");
-        if (favOrNews == "clone_fav") {
+        let favOrNews = $(this).parent().parent().attr("class");
+        if (favOrNews == "fav_data_body") {
             fav_url = $("#fav_card_title_" + fav_id)
                 .find("a")
                 .attr("href");
@@ -29,6 +29,7 @@ $(function () {
                 .find("img.news_thumbnail")
                 .attr("src");
         }
+
         $.ajax({
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -54,7 +55,7 @@ $(function () {
         $("#favorite_" + fav_id).show();
         $("#favorite_after_" + fav_id).hide();
         // お気に入り論理削除
-        let favOrData = $(this).parent().attr("class");
+        let favOrData = $(this).parent().parent().attr("class");
         if (favOrData == "clone_fav") {
             fav_url = $("#fav_card_title_" + fav_id)
                 .find("a")
@@ -128,6 +129,10 @@ $(function () {
             success: function (data) {
                 $("div.data_body").hide();
                 $("div.fav_data_body").show();
+                $(".fav_data_body")
+                    .find(".clone_fav")
+                    .not("#original")
+                    .remove();
                 $.each(data, function (index, fav) {
                     cloneFav(index);
                     $("#fav_card_title_9" + index)
@@ -140,7 +145,7 @@ $(function () {
                         .find("img")
                         .attr("src", fav.image_url);
                 });
-                $("#original").remove();
+                $("#original").hide();
             },
             error: function (err) {
                 console.log(err);
@@ -156,6 +161,7 @@ $(function () {
 
     function cloneFav(index) {
         cloned_card = $("#original").clone(true);
+        cloned_card.css("display", "flex");
         cloned_card.appendTo(".fav_data_body");
         cloned_card.attr("id", "fav_9" + index);
         cloned_card
