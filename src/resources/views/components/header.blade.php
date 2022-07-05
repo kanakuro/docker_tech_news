@@ -1,6 +1,6 @@
 <header>
     <h1 class="headline">
-      <a>サンプルのサイト</a>
+      <a>ポートフォリオ</a>
     </h1>
     <ul class="nav-list">
       <li class="nav-list-item">

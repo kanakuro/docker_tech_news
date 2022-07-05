@@ -10,14 +10,14 @@ use GuzzleHttp\Psr7;
 
 class ApiController extends Controller
 {
-    public function index()
+    public static function getIndex()
     {
         $fav_flg = 0;
         try {
             $url = config('newsapi.news_api_url') . "top-headlines?country=jp&category=technology&apiKey=" . config('newsapi.news_api_key');
             $method = "GET";
             // 15記事表示
-            $count = 9;
+            $count = 10;
             // API接続
             $client = new Client();
             $response = $client->request($method, $url);

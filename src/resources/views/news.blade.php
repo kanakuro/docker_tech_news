@@ -1,3 +1,11 @@
+<div class="news_menu">
+    <div class="fav_list">
+        <button class="to_fav_list">お気に入り</button>
+    </div>
+    <div class="news_list">
+        <button class="to_news_list">ニュース一覧</button>
+    </div>
+</div>
 <div class="field">
     @foreach($news as $data)
     <div class="data_body" id="data_body_0{{$loop->index}}">
