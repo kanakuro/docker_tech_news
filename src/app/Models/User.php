@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -49,16 +50,22 @@ class User extends Authenticatable
 
     public static function getUser($login_id, $password)
     {
+
         $user = User::where('login_id', $login_id)
-                ->where('password', $password)
-                ->first();
-        return $user;
+            ->first();
+        if(isset($user)){
+            $result = false;
+            if(Hash::check($password, $user->password)){
+                $result = true;
+            };
+        }
+        return $result;
     }
     public static function registUser($login_id, $password)
     {
         $user = new User;
         $user -> login_id= $login_id;
-        $user -> password = $password;
+        $user -> password = Hash::make($password);
         $user -> created_at = today();
         $user -> updated_at = today();
 

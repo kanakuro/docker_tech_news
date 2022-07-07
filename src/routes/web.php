@@ -19,7 +19,7 @@ Route::get('/post_favorite', [ApiController::class, 'registFav']);
 Route::get('/get_favorite', [ApiController::class, 'getFav']);
 Route::get('/invalid_favorite', [ApiController::class, 'invalidFav']);
 Route::get('/notify_slack', [ApiController::class, 'sendSlack']);
-Route::get('/login/{create_user?}/{message?}', [LoginController::class, 'getLogin'])->name('login');
+Route::get('/login/{create_user?}/{errmessage?}', [LoginController::class, 'getLogin'])->name('login');
 Route::post('/confirm_or_regist_user', [LoginController::class, 'confirmOrRegistUser']);
 
 // Route::get('/', function () {
