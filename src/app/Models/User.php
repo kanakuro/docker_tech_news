@@ -50,11 +50,10 @@ class User extends Authenticatable
 
     public static function getUser($login_id, $password)
     {
-
+        $result = false;
         $user = User::where('login_id', $login_id)
             ->first();
         if(isset($user)){
-            $result = false;
             if(Hash::check($password, $user->password)){
                 $result = true;
             };
@@ -63,13 +62,15 @@ class User extends Authenticatable
     }
     public static function registUser($login_id, $password)
     {
+        $result = false;
         $user = new User;
         $user -> login_id= $login_id;
         $user -> password = Hash::make($password);
         $user -> created_at = today();
         $user -> updated_at = today();
-
-        return $user ->save();
+        $user ->save();
+        $result = true;
+        return $result;
     }
 
 

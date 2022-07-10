@@ -21,3 +21,6 @@ form {
   .error{
       color: red;
   }
+  li{
+    list-style:none;
+  }

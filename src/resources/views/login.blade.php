@@ -20,15 +20,24 @@
                 <p>必要事項をご入力の上、「アカウント作成」ボタンをクリックしてください。</p>
             @endif
         </div>
-        @if(isset($errmessage))
-        <div class="error">{{$errmessage}}</div>
-        @endif
+        <div class="error">
+            @if(count($errors) > 0)
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            @endif
+            @if(isset($errmessage))
+            {{$errmessage}}
+            @endif
+        </div>
         <div class="login_form_btm">
-            <input type="id" name="login_id" placeholder="ユーザーIDを入力してください">
-            <input type="password" name="password"placeholder="パスワードを入力してください">
+            <input type="id" name="login_id" placeholder="ユーザーIDを入力してください" value="{{old('login_id')}}">
+            <input type="password" name="password" placeholder="パスワードを入力してください">
             @if($create_user)
-                <input type="password_confirm" name="password_confirm"placeholder="パスワードを再入力してください">
-                <input type="email" name="email"placeholder="メールアドレスを入力してください">
+                <input type="password_confirmation" name="password_confirmation" placeholder="パスワードを再入力してください">
+                <input type="email" name="email" placeholder="メールアドレスを入力してください"  value="{{old('email')}}"> 
             @endif
             <input type="hidden" name="create_user_flg" value="{{$create_user}}">
         </div>

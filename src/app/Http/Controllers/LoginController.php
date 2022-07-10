@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\LoginRequest;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7;
@@ -30,21 +32,20 @@ class LoginController extends Controller
         ]);
     }
 
-    public function confirmOrRegistUser(Request $request){
+    public function confirmOrRegistUser(LoginRequest $request){
         $login_id = $request->login_id;
         $password = $request->password;
+        $email = $request->email;
         $create_user = $request->create_user_flg;
+        $result = null;
         if(!isset($create_user)){
             $create_user = 0;
         }
         // ログインの場合
         if ($request->has('login')) {
-            $user = User::getUser($login_id, $password);
-            $param =[];
-            if (isset($user)) {
-                // ログイン成功
+            if(Auth::attempt(['login_id'=>$login_id, 'password'=>$password])){
                 return redirect()->action([ApiController::class, 'getIndex']);
-            } else {
+            }else{
                 // ログイン失敗
                 $errmessage = 'ユーザIDもしくはパスワードが間違っています';
                 $param = [
@@ -56,13 +57,23 @@ class LoginController extends Controller
         // アカウント作成の場合
         }elseif($request->has('create_user')){
             // アカウント作成成功
-            User::registUser($login_id, $password);
-            $message = 'アカウント作成しました';
-            $param = [
-                'create_user' => $create_user,
-                'message' => $message
-            ];
-            return redirect()->action([ApiController::class, 'getIndex']);
+            $result = User::registUser($login_id, $password);
+            if($result == true){
+                $message = 'アカウント作成しました';
+                $param = [
+                    'create_user' => $create_user,
+                    'message' => $message
+                ];
+                return redirect()->action([ApiController::class, 'getIndex']);
+            }else{
+                // エラー
+                $errmessage = 'アカウント作成できませんでした';
+                $param = [
+                    'create_user' => $create_user,
+                    'errmessage' => $errmessage
+                ];
+                return redirect()->action([LoginController::class, 'getLogin']  , $param);
+            }
 
         }else{
             // エラー
@@ -73,8 +84,6 @@ class LoginController extends Controller
             ];
             return redirect()->action([LoginController::class, 'getLogin'], $param);
         }
-        // return view('confirm-or-regist-user', $param);
-
     }
 
 }
