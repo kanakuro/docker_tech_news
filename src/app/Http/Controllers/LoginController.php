@@ -7,43 +7,30 @@ use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\LoginRequest;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Psr7;
 
 class LoginController extends Controller
 {
-    public function getLogin($create_user, $errmessage=null)
+    public function getLogin($create_user=null, $errmessage=null)
     {
-        try {
-            if(!isset($create_user)){
-                $create_user = false;
-            }
-        } catch (RequestException $e) {
-            echo Psr7\Message::toString($e->getRequest());
-            if ($e->hasResponse()) {
-                echo Psr7\Message::toString($e->getResponse());
-            }
-        }
         return view('login', [
             'create_user' => $create_user,
             'errmessage' => $errmessage
-            // 'fav_flg'x => $fav_flg
         ]);
     }
 
     public function confirmOrRegistUser(LoginRequest $request){
         $login_id = $request->login_id;
         $password = $request->password;
-        $email = $request->email;
         $create_user = $request->create_user_flg;
         $result = null;
         if(!isset($create_user)){
             $create_user = 0;
         }
+
         // ログインの場合
         if ($request->has('login')) {
             if(Auth::attempt(['login_id'=>$login_id, 'password'=>$password])){
+                // ログイン成功
                 return redirect()->action([ApiController::class, 'getIndex']);
             }else{
                 // ログイン失敗

@@ -20,22 +20,22 @@
         <div class="favorite_area">
             @if($data['fav'] == 0)
                 <div class="favorite" id="favorite_0{{$loop->index}}">
-                    <img src="../img/heart.png" class="favorite_icon">
+                    <img src="../img/heart.png" class="favorite_icon" title="お気に入り登録">
                 </div>
                 <div class="favorite_after" id="favorite_after_0{{$loop->index}}" style="display:none;">
-                    <img src="../img/heart_red.png" class="favorite_icon">
+                    <img src="../img/heart_red.png" class="favorite_icon" title="お気に入り解除">
                 </div>
             @elseif($data['fav'] == 1)
                 <div class="favorite" id="favorite_0{{$loop->index}}" style="display:none;">
-                    <img src="../img/heart.png" class="favorite_icon">
+                    <img src="../img/heart.png" class="favorite_icon" title="お気に入り登録">
                 </div>
                 <div class="favorite_after" id="favorite_after_0{{$loop->index}}">
-                    <img src="../img/heart_red.png" class="favorite_icon">
+                    <img src="../img/heart_red.png" class="favorite_icon" title="お気に入り解除">
                 </div>
             @endif
         </div>
         <div class="share_area">
-            <div class="share">
+            <div class="share" title="Slack送信">
             </div>
             <div class="share_active">
                 <img src="../img/share_blue.png" class="share_icon">
@@ -55,14 +55,14 @@
             </div>
             <div class="favorite_area">
                 <div class="favorite" style="display:none;">
-                    <img src="../img/heart.png" class="favorite_icon">
+                    <img src="../img/heart.png" class="favorite_icon" title="お気に入り登録">
                 </div>
                 <div class="favorite_after">
-                    <img src="../img/heart_red.png" class="favorite_icon">
+                    <img src="../img/heart_red.png" class="favorite_icon" title="お気に入り解除">
                 </div>
             </div>
             <div class="share_area">
-                <div class="share">
+                <div class="share" title="Slack送信">
                 </div>
                 <div class="share_active">
                     <img src="../img/share_blue.png" class="share_icon">

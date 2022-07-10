@@ -16,8 +16,6 @@ class ApiController extends Controller
         try {
             $url = config('newsapi.news_api_url') . "top-headlines?country=jp&category=technology&apiKey=" . config('newsapi.news_api_key');
             $method = "GET";
-            // 15記事表示
-            $count = 10;
             // API接続
             $client = new Client();
             $response = $client->request($method, $url);
@@ -30,6 +28,12 @@ class ApiController extends Controller
             $fav_lists = FavoriteNews::where('user_id', 99)
             ->where('invalid', 0)
             ->get();
+
+            // 15記事表示
+            $count = 15;
+            if(count($articles['articles']) < $count){
+                $count = count($articles['articles']);
+            }
             for ($id = 0; $id < $count; $id++) {
                 $is_fav = 0;
                 $news_name = $articles['articles'][$id]['title'];
@@ -51,10 +55,12 @@ class ApiController extends Controller
             }
             
         } catch (RequestException $e) {
-            echo Psr7\Message::toString($e->getRequest());
             if ($e->hasResponse()) {
                 echo Psr7\Message::toString($e->getResponse());
             }
+        } catch (\Throwable $e) {
+            \Log::error($e);
+            throw $e;
         }
         return view('index', [
             'news' => $news,
@@ -73,11 +79,10 @@ class ApiController extends Controller
     }
 
     public function getFav(Request $request)
-    {
+    {   
+        // 仮の値
         $user_id = 99;
-        $result = FavoriteNews::where('user_id', $user_id)
-        ->where('invalid', 0)
-        ->get()->toArray();
+        $result = FavoriteNews::getFav($user_id);
         return $result;
     }
 

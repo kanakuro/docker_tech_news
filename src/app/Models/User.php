@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use \Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -51,26 +52,42 @@ class User extends Authenticatable
     public static function getUser($login_id, $password)
     {
         $result = false;
-        $user = User::where('login_id', $login_id)
-            ->first();
-        if(isset($user)){
-            if(Hash::check($password, $user->password)){
-                $result = true;
-            };
+        try {
+            $user = User::where('login_id', $login_id)
+                ->first();
+            if (isset($user)) {
+                if (Hash::check($password, $user->password)) {
+                    $result = true;
+                };
+            }
+            return $result;
+        }catch (ModelNotFoundException $e) {
+            // データが見つからなかっただけならロギング不要
+            throw $e;
+        }catch(\Throwable $e) {
+            \Log::error($e);
+            throw $e;
         }
-        return $result;
     }
     public static function registUser($login_id, $password)
     {
         $result = false;
-        $user = new User;
-        $user -> login_id= $login_id;
-        $user -> password = Hash::make($password);
-        $user -> created_at = today();
-        $user -> updated_at = today();
-        $user ->save();
-        $result = true;
-        return $result;
+        try {
+            DB::beginTransaction();
+            $user = new User;
+            $user -> login_id= $login_id;
+            $user -> password = Hash::make($password);
+            $user -> created_at = today();
+            $user -> updated_at = today();
+            $user ->save();
+            $result = true;
+            DB::commit();
+            return $result;
+        }catch(\Throwable $e) {
+            DB::rollback();
+            \Log::error($e);
+            throw $e;
+        }
     }
 
 
