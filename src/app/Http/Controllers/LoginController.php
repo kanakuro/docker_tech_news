@@ -31,6 +31,10 @@ class LoginController extends Controller
         if ($request->has('login')) {
             if(Auth::attempt(['login_id'=>$login_id, 'password'=>$password])){
                 // ログイン成功
+                $result_ary = User::getUser($login_id, $password);
+                $user_id = $result_ary['user']->id;
+                // セッションにログインIDとユーザIDを保存
+                session(['user_id' => $user_id, 'login_id'=>$login_id]);
                 return redirect()->action([ApiController::class, 'getIndex']);
             }else{
                 // ログイン失敗

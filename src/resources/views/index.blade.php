@@ -12,6 +12,8 @@
 <body>
 <x-header>
 </x-header>
+<div class="show_login_id">{{$login_id}}さん、ようこそ</div>
+
 @include('news')
 <x-footer>
 </x-footer>

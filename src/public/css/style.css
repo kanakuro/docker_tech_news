@@ -109,6 +109,9 @@ header {
       font-size: 30px;
       text-decoration: underline;
   }
+  .show_login_id{
+      padding: 10px;
+  }
   .nav-list {
       line-height: 100px;
       list-style: none;

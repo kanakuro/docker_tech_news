@@ -29,8 +29,8 @@ class ApiController extends Controller
             ->where('invalid', 0)
             ->get();
 
-            // 15記事表示
-            $count = 15;
+            // 10記事表示
+            $count = 10;
             if(count($articles['articles']) < $count){
                 $count = count($articles['articles']);
             }
@@ -63,6 +63,7 @@ class ApiController extends Controller
             throw $e;
         }
         return view('index', [
+            'login_id' => session('login_id', 'guest'),
             'news' => $news,
             'fav_flg' => $fav_flg
         ]);
@@ -80,8 +81,7 @@ class ApiController extends Controller
 
     public function getFav(Request $request)
     {   
-        // 仮の値
-        $user_id = 99;
+        $user_id = session('user_id', 99);
         $result = FavoriteNews::getFav($user_id);
         return $result;
     }

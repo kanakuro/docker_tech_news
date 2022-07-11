@@ -52,6 +52,7 @@ class User extends Authenticatable
     public static function getUser($login_id, $password)
     {
         $result = false;
+        $user = null;
         try {
             $user = User::where('login_id', $login_id)
                 ->first();
@@ -60,7 +61,7 @@ class User extends Authenticatable
                     $result = true;
                 };
             }
-            return $result;
+            return array('result'=>$result, 'user'=>$user);
         }catch (ModelNotFoundException $e) {
             // データが見つからなかっただけならロギング不要
             throw $e;
