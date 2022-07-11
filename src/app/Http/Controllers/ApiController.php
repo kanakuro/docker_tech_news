@@ -24,8 +24,8 @@ class ApiController extends Controller
             $articles = json_decode($results, true);
 
             $news = [];
-
-            $fav_lists = FavoriteNews::where('user_id', 99)
+            $user_id = session('user_id', 99);
+            $fav_lists = FavoriteNews::where('user_id', $user_id)
             ->where('invalid', 0)
             ->get();
 
@@ -74,7 +74,7 @@ class ApiController extends Controller
         $fav_url = $request->url;
         $fav_title = $request->title;
         $fav_img_url =  $request->img_url;
-        $user_id = 99;
+        $user_id = session('user_id', 99);
         FavoriteNews::registFav($user_id, $fav_title, $fav_url, $fav_img_url);
         return;
     }
@@ -91,7 +91,7 @@ class ApiController extends Controller
         $fav_url = $request->url;
         $fav_title = $request->title;
         $fav_img_url = $request->img_url;
-        $user_id = $request->user_id;
+        $user_id = session('user_id', 99);
         $existing_fav = FavoriteNews::checkExistingFav($user_id, $fav_title, $fav_url, $fav_img_url);
         if (isset($existing_fav)) {
             FavoriteNews::invalidFav($existing_fav -> id);
