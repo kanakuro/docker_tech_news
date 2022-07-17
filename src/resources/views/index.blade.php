@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <script type="text/javascript" src="{{ asset('js/app.js')}}"></script>
 </head>
-<body>
+<body link="#000000" vlink="#ffffff" alink="#ffff00">
 <x-header>
 </x-header>
 <div class="show_login_id">{{$login_id}}さん、ようこそ</div>

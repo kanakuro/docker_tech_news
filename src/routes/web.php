@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ChartApiController;
+use App\Http\Middleware\IndexMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,14 +16,19 @@ use App\Http\Controllers\LoginController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/index', [ApiController::class, 'getIndex'])->name('index');;
-Route::get('/post_favorite', [ApiController::class, 'registFav']);
-Route::get('/get_favorite', [ApiController::class, 'getFav']);
-Route::get('/invalid_favorite', [ApiController::class, 'invalidFav']);
-Route::get('/notify_slack', [ApiController::class, 'sendSlack']);
 Route::get('/login/{create_user?}/{errmessage?}', [LoginController::class, 'getLogin'])->name('login');
 Route::post('/confirm_or_regist_user', [LoginController::class, 'confirmOrRegistUser']);
 
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/index', [ApiController::class, 'getIndex'])->name('index');
+    Route::get('/post_favorite', [ApiController::class, 'registFav']);
+    Route::get('/get_favorite', [ApiController::class, 'getFav']);
+    Route::get('/invalid_favorite', [ApiController::class, 'invalidFav']);
+    Route::get('/notify_slack', [ApiController::class, 'sendSlack']);
+
+    Route::get('/charts', [ChartApiController::class, 'getIndex']);
+
+});
 // Route::get('/', function () {
 //     // return view('welcome');
 // });
