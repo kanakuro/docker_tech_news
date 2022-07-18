@@ -65,7 +65,8 @@ class ApiController extends Controller
         return view('index', [
             'login_id' => session('login_id', 'guest'),
             'news' => $news,
-            'fav_flg' => $fav_flg
+            'fav_flg' => $fav_flg,
+            'charts_flg' => false
         ]);
     }
 

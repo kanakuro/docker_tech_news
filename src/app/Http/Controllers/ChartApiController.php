@@ -12,11 +12,26 @@ class ChartApiController extends Controller
             echo $res_ary['message'];
             return;
         }else{
+            $charts_flg = true;
             $data = $res_ary['data'];
+            $labels = [];
+            $amount = [];
             foreach($data as $index => $asset){
-
+                if($asset['amount'] != 0){
+                    $jpy = 0;
+                    $amount_jpy = round($asset['amount'] * $asset['conversionRate']);
+                    array_push($labels, $asset['symbol']);
+                    array_push($amount, $amount_jpy);
+                }
             }
         }
+        return view('index', [
+            'login_id' => session('login_id', 'guest'),
+            'charts_flg' => $charts_flg,
+            'labels' => $labels,
+            'amount' => $amount
+        ]);
+
     }
 
     public static function getAssets(){

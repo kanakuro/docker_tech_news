@@ -13,8 +13,11 @@
 <x-header>
 </x-header>
 <div class="show_login_id">{{$login_id}}さん、ようこそ</div>
-
-@include('news')
+@if($charts_flg == true)
+    @include('charts')
+@else
+    @include('news')
+@endif
 <x-footer>
 </x-footer>
 </body>

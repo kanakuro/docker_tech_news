@@ -26,9 +26,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/invalid_favorite', [ApiController::class, 'invalidFav']);
     Route::get('/notify_slack', [ApiController::class, 'sendSlack']);
 
-    Route::get('/charts', [ChartApiController::class, 'getIndex']);
+    Route::get('/index/charts', [ChartApiController::class, 'getIndex']);
 
 });
-// Route::get('/', function () {
-//     // return view('welcome');
-// });

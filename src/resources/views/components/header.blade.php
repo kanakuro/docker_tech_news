@@ -6,7 +6,9 @@
       <li class="nav-list-item">
         <a href="/index">NEWS</a>
       </li>
-      <li class="nav-list-item">CHARTS</li>
+      <li class="nav-list-item">
+        <a href="/index/charts">CHARTS</a>
+      </li>
       <li class="nav-list-item">LOGOUT</li>
     </ul>
 </header>
