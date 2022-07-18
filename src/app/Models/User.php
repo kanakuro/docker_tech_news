@@ -70,6 +70,25 @@ class User extends Authenticatable
             throw $e;
         }
     }
+
+    public static function getUserEmail()
+    {
+        $login_id = session('login_id');
+        $user = null;
+        try {
+            $user = User::where('login_id', $login_id)
+                ->first();
+            $email = $user -> email;
+            return $email;
+        }catch (ModelNotFoundException $e) {
+            // データが見つからなかっただけならロギング不要
+            throw $e;
+        }catch(\Throwable $e) {
+            \Log::error($e);
+            throw $e;
+        }
+    }
+
     public static function registUser($login_id, $password)
     {
         $result = false;

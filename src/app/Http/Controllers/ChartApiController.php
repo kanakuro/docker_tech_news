@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Mail\SendChartData;
+use Illuminate\Contracts\Mail\Mailer;
 
 class ChartApiController extends Controller
 {
@@ -64,6 +67,17 @@ class ChartApiController extends Controller
         return $res_ary;
     }
 
+    public function sendMail(Mailer $mailer){
+        $email = User::getUserEmail();
+        if(isset($email)){
+            $mailer->to($email)
+            ->send(new SendChartData());
+            \Log::debug('yes');
+        }else{
+            \Log::debug('no');
+            return;
+        }
+    }
 
 
 }

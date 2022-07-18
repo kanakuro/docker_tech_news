@@ -132,6 +132,29 @@ header {
   ul.footer-menu li {
   display: inline;
   }
+  .asset{
+      padding:2rem;
+      display:flex;
+      align-items: center;
+  }
+  .asset_chart{
+    width: 50%;
+    padding: 2rem;
+  }
+  .send_email{
+    background-image:url("../img/email.png");
+    width: 30;
+    padding:2.5rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  .send_email:hover{
+      cursor:pointer;
+  }
+  .send_email:active{
+      background-image:url("../img/email_blue.png");
+  }
+
 @media screen and (max-width: 959px) {
     /* 959px以下に適用されるCSS（タブレット用） */
 }

@@ -3,7 +3,13 @@
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 <script src="https://unpkg.com/chart.js-plugin-labels-dv@3.0.5/dist/chartjs-plugin-labels.min.js"></script>
 
-<canvas id="myChart"></canvas>
+<div class="asset">
+    <div class="asset_chart">
+        <canvas id="myChart"></canvas>
+    </div>
+    <div class="send_email" title="データをメール送信"></div>
+</div>
+
 <!-- グラフを描画 -->
 <script>
 var ctx = document.getElementById("myChart");

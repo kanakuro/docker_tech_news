@@ -27,5 +27,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/notify_slack', [ApiController::class, 'sendSlack']);
 
     Route::get('/index/charts', [ChartApiController::class, 'getIndex']);
-
+    Route::get('/send_chart_data', [ChartApiController::class, 'sendMail']);
 });
